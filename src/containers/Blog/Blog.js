@@ -11,8 +11,7 @@ class Blog extends Component {
         super(props);
         this.state = {
             posts: [],
-            currentlyDisplayedTitle: 'Select a post',
-            currentlyDisplayedContent: 'The full post will be displayed here',
+            selectedId: null,
         }
     }
 
@@ -26,17 +25,12 @@ class Blog extends Component {
                     author: 'Sam'
                 }
             });
-
             this.setState({ posts: updatedPosts });
-            console.log(response)
         })
     }
 
-    displayPost = (title, content) => {
-        this.setState({ 
-            currentlyDisplayedTitle: title,
-            currentlyDisplayedContent: content,
-        })
+    displayPost = (selectedId) => {
+        this.setState({ selectedId: selectedId, });
     }
 
     render () {
@@ -47,7 +41,7 @@ class Blog extends Component {
                     userID={post.userId} 
                     title={post.title}
                     author={post.author}
-                    onClick={() => this.displayPost(post.title, post.body)} />
+                    onClick={() => this.displayPost(post.id)} />
             );
         });
 
@@ -57,10 +51,7 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                    <FullPost 
-                        title={this.state.currentlyDisplayedTitle} 
-                        content={this.state.currentlyDisplayedContent} 
-                    />
+                    <FullPost selectedId={this.state.selectedId} />
                 </section>
                 <section>
                     <NewPost />
