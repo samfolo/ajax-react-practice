@@ -11,6 +11,8 @@ class Blog extends Component {
         super(props);
         this.state = {
             posts: [],
+            currentlyDisplayedTitle: 'Select a post',
+            currentlyDisplayedContent: 'The full post will be displayed here',
         }
     }
 
@@ -30,6 +32,13 @@ class Blog extends Component {
         })
     }
 
+    displayPost = (title, content) => {
+        this.setState({ 
+            currentlyDisplayedTitle: title,
+            currentlyDisplayedContent: content,
+        })
+    }
+
     render () {
         const posts = this.state.posts.map((post, i) => {
             return (
@@ -38,7 +47,7 @@ class Blog extends Component {
                     userID={post.userId} 
                     title={post.title}
                     author={post.author}
-                    body={post.body} />
+                    onClick={() => this.displayPost(post.title, post.body)} />
             );
         });
 
@@ -48,7 +57,10 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost 
+                        title={this.state.currentlyDisplayedTitle} 
+                        content={this.state.currentlyDisplayedContent} 
+                    />
                 </section>
                 <section>
                     <NewPost />
