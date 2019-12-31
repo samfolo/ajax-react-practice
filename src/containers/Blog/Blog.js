@@ -17,7 +17,15 @@ class Blog extends Component {
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/posts')
         .then(response => {
-            this.setState({ posts: response.data });
+            const posts = response.data.slice(0, 4);
+            const updatedPosts = posts.map(post => {
+                return {
+                    ...post,
+                    author: 'Sam'
+                }
+            });
+
+            this.setState({ posts: updatedPosts });
             console.log(response)
         })
     }
@@ -28,7 +36,8 @@ class Blog extends Component {
                 <Post 
                     key={`id_${post.title[0]}_${i}_${post.userId}`} 
                     userID={post.userId} 
-                    title={post.title} 
+                    title={post.title}
+                    author={post.author}
                     body={post.body} />
             );
         });
