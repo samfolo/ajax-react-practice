@@ -13,6 +13,7 @@ class NewPost extends Component {
     }
 
     componentDidMount() {
+        // if user isnt logged in =>  this.props.history.replace('/posts); #redirect
         console.log(this.props);
     }
 
@@ -25,7 +26,8 @@ class NewPost extends Component {
         axios.post('/posts', post)
         .then(response => {
             console.log(response);
-            this.setState({ submitted: true, });
+            this.props.history.replace('/posts');
+            // or use this to toggle the redirect component (below): this.setState({ submitted: true, });
         });
     }
 
