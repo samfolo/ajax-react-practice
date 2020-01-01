@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from '../../axios';
+import { Link } from 'react-router-dom';
 
 import Post from '../../../components/Post/Post';
 import './Posts.css'
@@ -42,12 +43,13 @@ class Posts extends React.Component {
     if (!this.state.error) {
         posts = this.state.posts.map((post, i) => {
             return (
-                <Post 
-                    key={`id_${post.title[0]}_${i}_${post.userId}`} 
-                    userID={post.userId} 
-                    title={post.title}
-                    author={post.author}
-                    onClick={() => this.displayPost(post.id)} />
+                <Link to={'/' + post.id} key={`id_${post.title[0]}_${i}_${post.userId}`} >
+                  <Post
+                      userID={post.userId} 
+                      title={post.title}
+                      author={post.author}
+                      onClick={() => this.displayPost(post.id)} />
+                </Link>
             );
         });
     }
