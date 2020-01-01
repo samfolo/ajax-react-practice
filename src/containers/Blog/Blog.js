@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
 import Posts from '../Blog/Posts/Posts';
 import NewPost from '../Blog/NewPost/NewPost';
@@ -33,9 +33,11 @@ class Blog extends Component {
                 {/* <Route path='/' exact render={() => <h1>Home</h1>} />
                 <Route path='/new-post' exact render={() => <h1>New Post</h1>} />
                 <Route path='/' render={() => <h1>Both Pages (no 'exact' prop)</h1>} /> */}
-                <Route path='/' exact component={Posts} />
-                <Route path='/new-post' component={NewPost} />
-                <Route path='/:id' exact component={FullPost} />
+                <Switch>
+                    <Route path='/' exact component={Posts} />
+                    <Route path='/new-post' component={NewPost} />
+                    <Route path='/:id' exact component={FullPost} />
+                </Switch>
                 {/* <section>
                     <FullPost selectedId={this.state.selectedId} />
                 </section>
