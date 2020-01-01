@@ -11,9 +11,9 @@ class FullPost extends Component {
         }
     }
 
-    componentDidMount() {
+    loadData() {
         if (this.props.match.params.id) {
-            if (!this.state.loadedPost || this.props.match.params.id !== this.state.loadedPost.id) {
+            if (!this.state.loadedPost || this.props.match.params.id !== this.state.loadedPost.id.toString()) {
                 axios.get(`/posts/${this.props.match.params.id}`)
                 .then(response => {
                     this.setState({ 
@@ -22,6 +22,22 @@ class FullPost extends Component {
                 });
             }
         }
+    }
+
+    componentDidMount() {
+        this.loadData();
+    }
+
+    componentDidUpdate() {
+        this.loadData();
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.loadedPost) {
+            return (nextProps.match.params.id !== this.state.loadedPost.id.toString())
+        }
+        
+        return true;
     }
 
     handleDeletePost = () => {

@@ -3,7 +3,6 @@ import { Route, NavLink, Switch } from 'react-router-dom';
 
 import Posts from '../Blog/Posts/Posts';
 import NewPost from '../Blog/NewPost/NewPost';
-import FullPost from './FullPost/FullPost';
 
 import './Blog.css';
 
@@ -15,13 +14,13 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><NavLink 
-                                to='/' 
-                                exact 
+                                to='/posts' 
+                                exact
                                 activeClassName="active"
                                 activeStyle={{
                                     color: '#fa923f',
                                     textDecoration: 'underline'
-                                }}>Home</NavLink></li>
+                                }}>Posts</NavLink></li>
                             <li><NavLink to={{
                                 pathname: '/new-post', // <<< how to use relative paths
                                 hash: '#submit', // these are just a few options avilable on Link components
@@ -33,10 +32,9 @@ class Blog extends Component {
                 {/* <Route path='/' exact render={() => <h1>Home</h1>} />
                 <Route path='/new-post' exact render={() => <h1>New Post</h1>} />
                 <Route path='/' render={() => <h1>Both Pages (no 'exact' prop)</h1>} /> */}
-                <Route path='/' exact component={Posts} />
                 <Switch>
                     <Route path='/new-post' component={NewPost} />
-                    <Route path='/:id' exact component={FullPost} />
+                    <Route path='/posts' component={Posts} />
                 </Switch>
                 {/* <section>
                     <FullPost selectedId={this.state.selectedId} />
