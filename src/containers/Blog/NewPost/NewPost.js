@@ -13,7 +13,7 @@ class NewPost extends Component {
     }
 
     componentDidMount() {
-        // if user isnt logged in =>  this.props.history.replace('/posts); #redirect
+        // if user isnt logged in =>  this.props.history.replace('/posts); // redirect
         console.log(this.props);
     }
 
