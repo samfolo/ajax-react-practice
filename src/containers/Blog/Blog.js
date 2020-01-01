@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from '../axios';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 import Posts from '../Blog/Posts/Posts';
 import NewPost from '../Blog/NewPost/NewPost';
@@ -14,12 +13,19 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><Link to='/'>Home</Link></li>
-                            <li><Link to={{
-                                pathname: this.props.match.url + '/new-post', // <<< how to use relative paths
+                            <li><NavLink 
+                                to='/' 
+                                exact 
+                                activeClassName="active"
+                                activeStyle={{
+                                    color: '#fa923f',
+                                    textDecoration: 'underline'
+                                }}>Home</NavLink></li>
+                            <li><NavLink to={{
+                                pathname: '/new-post', // <<< how to use relative paths
                                 hash: '#submit', // these are just a few options avilable on Link components
                                 search: '?quick-submit=true',
-                            }}>New Post</Link></li>
+                            }}>New Post</NavLink></li>
                         </ul>
                     </nav>
                 </header>
